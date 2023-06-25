@@ -11,7 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.lightGreen,
         title: const Text("Admin Panel"),
       ),
       body: SingleChildScrollView(
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.people,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.crisis_alert_sharp,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.local_hospital,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -294,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
@@ -331,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.event,
+                      Icons.arrow_forward_ios,
                       color: Colors.blueGrey,
                     ),
                     Expanded(
