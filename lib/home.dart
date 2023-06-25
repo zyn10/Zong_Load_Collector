@@ -12,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-        title: const Text("Admin Panel"),
+        title: const Text("Tasks"),
       ),
       body: SingleChildScrollView(
         child: Column(
