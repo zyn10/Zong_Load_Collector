@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:load_collector/collector.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.green,
         title: const Text("Tasks"),
       ),
       body: SingleChildScrollView(
@@ -27,11 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundColor: const Color.fromARGB(255, 225, 225, 225),
                 ),
                 onPressed: () {
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const ManagerUser()),
-                  // );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Info()),
+                  );
                 },
                 child: const Row(
                   children: [
