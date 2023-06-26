@@ -32,7 +32,7 @@ showSnackBar(BuildContext context, String text) {
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 20.0),
       ),
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.green,
     ),
   );
 }
