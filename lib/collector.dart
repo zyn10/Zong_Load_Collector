@@ -7,7 +7,9 @@ import 'package:load_collector/utils/utils.dart';
 import 'pdf.dart';
 
 class Info extends StatefulWidget {
-  const Info({Key? key}) : super(key: key);
+  final String title;
+
+  const Info({Key? key, required this.title}) : super(key: key);
 
   @override
   State<Info> createState() => _InfoState();
@@ -21,12 +23,14 @@ class _InfoState extends State<Info> {
     3,
     (_) => TextEditingController(),
   );
+  final TextEditingController _siteIdController = TextEditingController();
 
   @override
   void dispose() {
     for (var controller in _readingControllers) {
       controller.dispose();
     }
+    _siteIdController.dispose();
     super.dispose();
   }
 
@@ -57,7 +61,7 @@ class _InfoState extends State<Info> {
             .toList();
 
         String documentTitle =
-            'CP METER LOAD'; // Replace with the desired document title
+            widget.title; // Use the provided title from the widget
         List<String> sectionSubtitles = [
           'Phase 1',
           'Phase 2',
@@ -65,18 +69,21 @@ class _InfoState extends State<Info> {
         ]; // Replace with the desired section subtitles
 
         // Generate PDF
+        // ignore: unused_local_variable
         File pdfFile = await PDFGenerator.generatePDF(
           documentTitle,
           sectionSubtitles,
           images,
           readings,
+          _siteIdController.text, // Pass the Site ID value
           context,
         );
 
         // Navigate back to the home screen
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       }
@@ -120,6 +127,24 @@ class _InfoState extends State<Info> {
               child: ListView(
                 padding: const EdgeInsets.all(20.0),
                 children: [
+                  TextFormField(
+                    controller: _siteIdController,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.location_on),
+                      hintText: 'Enter Site ID',
+                      errorStyle: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 15,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Site ID is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20.0),
                   for (var i = 0; i < 3; i++) ...[
                     Container(
                       height: MediaQuery.of(context).size.height * 0.15,

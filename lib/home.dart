@@ -30,7 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Info()),
+                    MaterialPageRoute(
+                        builder: (context) => const Info(
+                              title: 'CP Meter Load',
+                            )),
                   );
                 },
                 child: const Row(
@@ -42,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: Center(
                         child: Text(
-                          "CP METER LOAD",
+                          "CP Meter Load",
                           style: TextStyle(
                             color: Colors.blueGrey,
                             fontWeight: FontWeight.w600,
