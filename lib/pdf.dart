@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:load_collector/utils/utils.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf_merger/pdf_merger.dart';
 
@@ -19,7 +18,7 @@ class PDFGenerator {
     // Load the Helvetica font from assets
     final fontData = await rootBundle.load('assets/Helvetica.ttf');
     final ttf = pw.Font.ttf(fontData);
-    final Dat = DateTime.now();
+    final date = DateTime.now();
     // Add document title
     pdf.addPage(
       pw.Page(
@@ -37,7 +36,7 @@ class PDFGenerator {
                 ),
               ),
               pw.Text(
-                'Date : $Dat',
+                'Date : $date',
                 style: pw.TextStyle(
                   font: ttf,
                   fontSize: 12,
@@ -130,11 +129,13 @@ class PDFGenerator {
       await mergedFile.rename(filePath);
 
       // Show a success message
+      // ignore: use_build_context_synchronously
       showSnackBar(context, 'Files merged and updated');
 
       return mergedFile;
     } else {
       // Show an error message
+      // ignore: use_build_context_synchronously
       showSnackBar(context, 'Failed to merge files');
 
       // Return the new file
