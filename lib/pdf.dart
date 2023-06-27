@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:load_collector/utils/utils.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
+import 'package:pdf_merger/pdf_merger.dart';
 
 class PDFGenerator {
   static Future<File> generatePDF(
@@ -80,7 +82,7 @@ class PDFGenerator {
                           'Reading ${i + 1}: ${readings[i]}',
                           style: pw.TextStyle(
                             font: ttf,
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -94,14 +96,49 @@ class PDFGenerator {
       ),
     );
 
-    // Get the document directory path
-    final directory = await getApplicationDocumentsDirectory();
-    final fileName = '$siteId.pdf';
-    final filePath = '${directory.path}/$fileName';
+    // Get the downloads directory path
+    Directory generalDownloadDir = Directory(
+        '/storage/emulated/0/Download'); // Change directory as per your requirement
 
-    // Save the PDF as a file
-    final output = File(filePath);
-    await output.writeAsBytes(await pdf.save());
-    return output;
+    final fileName = '$siteId.pdf';
+    final filePath = '${generalDownloadDir.path}/$fileName';
+// Define the paths for the existing file and the new file
+    final existingFilePath = filePath;
+    final newFilePath = '${generalDownloadDir.path}/$siteId-new.pdf';
+
+// Save the PDF as a new file
+    final newFile = File(newFilePath);
+    await newFile.writeAsBytes(await pdf.save());
+
+// Merge the existing file and the new file
+    final mergedFilePath = '${generalDownloadDir.path}/$siteId.pdf';
+    final pathsToMerge = [existingFilePath, newFilePath];
+
+    MergeMultiplePDFResponse response = await PdfMerger.mergeMultiplePDF(
+        paths: pathsToMerge, outputDirPath: mergedFilePath);
+
+    if (response.status == "success") {
+      // Delete the previous file
+      final existingFile = File(existingFilePath);
+      await existingFile.delete();
+
+      // Delete the new file
+      await newFile.delete();
+
+      // Rename the merged file to the previous file name
+      final mergedFile = File(mergedFilePath);
+      await mergedFile.rename(filePath);
+
+      // Show a success message
+      showSnackBar(context, 'Files merged and updated');
+
+      return mergedFile;
+    } else {
+      // Show an error message
+      showSnackBar(context, 'Failed to merge files');
+
+      // Return the new file
+      return newFile;
+    }
   }
 }
