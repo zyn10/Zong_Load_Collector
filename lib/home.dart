@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
       // User canceled the picker
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

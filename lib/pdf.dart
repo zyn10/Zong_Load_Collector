@@ -130,7 +130,7 @@ class PDFGenerator {
 
       // Show a success message
       // ignore: use_build_context_synchronously
-      showSnackBar(context, 'Files merged and updated');
+      showSnackBar(context, 'Files merged and Updated');
 
       return mergedFile;
     } else {
