@@ -98,46 +98,36 @@ class PDFGenerator {
     // Get the downloads directory path
     Directory generalDownloadDir = Directory(
         '/storage/emulated/0/Download'); // Change directory as per your requirement
-
     final fileName = '$siteId.pdf';
     final filePath = '${generalDownloadDir.path}/$fileName';
 // Define the paths for the existing file and the new file
     final existingFilePath = filePath;
     final newFilePath = '${generalDownloadDir.path}/$siteId-new.pdf';
-
 // Save the PDF as a new file
     final newFile = File(newFilePath);
     await newFile.writeAsBytes(await pdf.save());
-
 // Merge the existing file and the new file
     final mergedFilePath = '${generalDownloadDir.path}/$siteId.pdf';
     final pathsToMerge = [existingFilePath, newFilePath];
-
     MergeMultiplePDFResponse response = await PdfMerger.mergeMultiplePDF(
         paths: pathsToMerge, outputDirPath: mergedFilePath);
-
     if (response.status == "success") {
       // Delete the previous file
       final existingFile = File(existingFilePath);
       await existingFile.delete();
-
       // Delete the new file
       await newFile.delete();
-
       // Rename the merged file to the previous file name
       final mergedFile = File(mergedFilePath);
       await mergedFile.rename(filePath);
-
       // Show a success message
       // ignore: use_build_context_synchronously
       showSnackBar(context, 'Files merged and Updated');
-
       return mergedFile;
     } else {
       // Show an error message
       // ignore: use_build_context_synchronously
       showSnackBar(context, 'Failed to merge files');
-
       // Return the new file
       return newFile;
     }

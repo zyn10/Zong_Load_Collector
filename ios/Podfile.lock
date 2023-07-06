@@ -44,8 +44,6 @@ PODS:
     - DKImagePickerController/PhotoGallery
     - Flutter
   - Flutter (1.0.0)
-  - flutter_file_dialog (0.0.1):
-    - Flutter
   - flutter_share_me (0.0.1):
     - FBSDKCoreKit (~> 14.0.0)
     - FBSDKLoginKit (~> 14.0.0)
@@ -53,14 +51,14 @@ PODS:
     - Flutter
   - image_picker_ios (0.0.1):
     - Flutter
-  - lecle_downloads_path_provider (0.0.1):
-    - Flutter
   - open_file (0.0.1):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - pdf_image_renderer (0.0.1):
+    - Flutter
+  - pdf_merger (0.0.1):
     - Flutter
   - SDWebImage (5.16.0):
     - SDWebImage/Core (= 5.16.0)
@@ -76,13 +74,12 @@ PODS:
 DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
-  - flutter_file_dialog (from `.symlinks/plugins/flutter_file_dialog/ios`)
   - flutter_share_me (from `.symlinks/plugins/flutter_share_me/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
-  - lecle_downloads_path_provider (from `.symlinks/plugins/lecle_downloads_path_provider/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - pdf_image_renderer (from `.symlinks/plugins/pdf_image_renderer/ios`)
+  - pdf_merger (from `.symlinks/plugins/pdf_merger/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - share_whatsapp (from `.symlinks/plugins/share_whatsapp/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -104,20 +101,18 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
-  flutter_file_dialog:
-    :path: ".symlinks/plugins/flutter_file_dialog/ios"
   flutter_share_me:
     :path: ".symlinks/plugins/flutter_share_me/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
-  lecle_downloads_path_provider:
-    :path: ".symlinks/plugins/lecle_downloads_path_provider/ios"
   open_file:
     :path: ".symlinks/plugins/open_file/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   pdf_image_renderer:
     :path: ".symlinks/plugins/pdf_image_renderer/ios"
+  pdf_merger:
+    :path: ".symlinks/plugins/pdf_merger/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   share_whatsapp:
@@ -135,13 +130,12 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 2f6a6a1445cc1b8ea0f733e60d02d2f7c4ebf8be
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_file_dialog: 4c014a45b105709a27391e266c277d7e588e9299
   flutter_share_me: 1fb559741e0dff56a9d2bdeaf4d966b0b47449ae
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
-  lecle_downloads_path_provider: b24e71004ad61a26c7e4422373627acdb01d9251
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   pdf_image_renderer: dc5cf3f09a47e742ed9438adda12d2f386993bc6
+  pdf_merger: 488fa9454fa422922ee8df77c4b6b8dc21639989
   SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   share_whatsapp: 95260a4b34242063c2bee3a00d78cada3e1f14ce
