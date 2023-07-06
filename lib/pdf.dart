@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:load_collector/utils/utils.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart';
 import 'package:pdf_merger/pdf_merger.dart';
@@ -95,18 +96,27 @@ class PDFGenerator {
       ),
     );
 
-    // Get the downloads directory path
-    Directory generalDownloadDir = Directory(
-        '/storage/emulated/0/Download'); // Change directory as per your requirement
+    //===========> Get the downloads directory path based on the platform
+    Directory generalDownloadDir;
+    if (Platform.isAndroid) {
+      generalDownloadDir = Directory('/storage/emulated/0/Download');
+    } else if (Platform.isIOS) {
+      generalDownloadDir = await getApplicationDocumentsDirectory();
+    } else {
+      throw UnsupportedError('Unsupported platform');
+    }
     final fileName = '$siteId.pdf';
     final filePath = '${generalDownloadDir.path}/$fileName';
-// Define the paths for the existing file and the new file
+
+  
+    //---------> Define the paths for the existing file and the new file
     final existingFilePath = filePath;
     final newFilePath = '${generalDownloadDir.path}/$siteId-new.pdf';
-// Save the PDF as a new file
+    
+    //---------> Save the PDF as a new file
     final newFile = File(newFilePath);
     await newFile.writeAsBytes(await pdf.save());
-// Merge the existing file and the new file
+    //---------> Merge the existing file and the new file
     final mergedFilePath = '${generalDownloadDir.path}/$siteId.pdf';
     final pathsToMerge = [existingFilePath, newFilePath];
     MergeMultiplePDFResponse response = await PdfMerger.mergeMultiplePDF(
