@@ -62,8 +62,8 @@ class PDFGenerator {
                       children: [
                         pw.Container(
                           alignment: pw.Alignment.center,
-                          width: 150,
-                          height: 150,
+                          width: 140,
+                          height: 140,
                           child: pw.Image(
                             pw.MemoryImage(images[i]),
                             fit: pw.BoxFit.contain,
