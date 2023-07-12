@@ -32,7 +32,7 @@ class PDFGenerator {
                 'Site ID : $siteId',
                 style: pw.TextStyle(
                   font: ttf,
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: pw.FontWeight.bold,
                 ),
               ),
