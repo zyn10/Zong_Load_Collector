@@ -49,7 +49,7 @@ class PDFGenerator {
                 documentTitle,
                 style: pw.TextStyle(
                   font: ttf,
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: pw.FontWeight.bold,
                 ),
               ),
