@@ -1,6 +1,9 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:load_collector/utils/utils.dart';
+
+import 'home_screen.dart';
 
 class Info extends StatefulWidget {
   final String title;
@@ -111,113 +114,112 @@ class _InfoState extends State<Info> {
           },
         ),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: const EdgeInsets.all(20.0),
-                children: [
+      body: SingleChildScrollView(
+        // Wrap the ListView with SingleChildScrollView to prevent overflow
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: _siteIdController,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.location_on),
+                    hintText: 'Enter Site ID',
+                    errorStyle: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 15,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Site ID is required';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20.0),
+                for (var i = 0; i < 3; i++) ...[
+                  Container(
+                    height: 100,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 2,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: _images[i] != null
+                        ? Image.memory(
+                            _images[i]!,
+                            fit: BoxFit.cover,
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                iconSize: 30,
+                                color: Colors.grey,
+                                onPressed: () => selectImage(i),
+                                icon: const Icon(Icons.add_a_photo),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Tap to add ${i + 1}st Picture',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
+                  const SizedBox(height: 20.0),
                   TextFormField(
-                    controller: _siteIdController,
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.location_on),
-                      hintText: 'Enter Site ID',
-                      errorStyle: TextStyle(
+                    controller: _readingControllers[i],
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.pin),
+                      hintText: 'Insert Reading ${i + 1}',
+                      errorStyle: const TextStyle(
                         color: Colors.redAccent,
                         fontSize: 15,
                       ),
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Site ID is required';
+                        return 'Reading is Empty';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 20.0),
-                  for (var i = 0; i < 3; i++) ...[
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 2,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      alignment: Alignment.center,
-                      child: _images[i] != null
-                          ? Image.memory(
-                              _images[i]!,
-                              fit: BoxFit.cover,
-                            )
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  iconSize: 30,
-                                  color: Colors.grey,
-                                  onPressed: () => selectImage(i),
-                                  icon: const Icon(Icons.add_a_photo),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Tap to add ${i + 1}st Picture',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: _readingControllers[i],
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.pin),
-                        hintText: 'Insert Reading ${i + 1}',
-                        errorStyle: const TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 15,
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Reading is Empty';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20.0),
-                  ],
-                  ElevatedButton(
-                    onPressed: push,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      minimumSize: const Size(350, 50),
-                    ),
-                    child: _isLoading
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          )
-                        : const Text('Push'),
-                  ),
                 ],
-              ),
+                ElevatedButton(
+                  onPressed: push,
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor:
+                        Colors.green, // Use white as the text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    minimumSize: const Size(350, 50),
+                  ),
+                  child: _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text('Push'),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

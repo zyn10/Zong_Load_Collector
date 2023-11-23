@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:load_collector/Screens/splash_screen.dart';
+import 'package:load_collector/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Zong Load Collector',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
+        primarySwatch: Colors.green,
       ),
+      debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
   }

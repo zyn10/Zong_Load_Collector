@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'data_collection.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -54,13 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   backgroundColor: const Color.fromARGB(255, 225, 225, 225),
                 ),
                 onPressed: () {
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const Info(
-                  //             title: 'CP Meter Load',
-                  //           )),
-                  // );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Info(
+                              title: 'CP Meter Load',
+                            )),
+                  );
                 },
                 child: const Row(
                   children: [
